@@ -1,0 +1,154 @@
+section{
+    height: 95vh;
+    width: 100vw;
+}
+.homePage {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.headerSection{
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0,100% 0, 100% 100%, 0 80vh);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: lightgray;
+
+    &__name{
+        margin: 0 5rem;
+        font-size: 2rem;
+        background-image: linear-gradient(to right bottom, lightgray, gray);
+        -webkit-background-clip: text;
+    }
+
+    &__description{
+        margin: 0 5rem;
+        font-size: 1.5rem;
+        font-weight: 100;
+    }
+}
+
+.aboutSection {
+    clip-path: polygon(0 0,100% 15vh, 100% 100%, 0 80vh);
+    color:white;
+    font-size: 1.6rem;
+    padding: 5rem 2rem;
+    display: grid;
+    grid-template-columns:  repeat(auto-fit,minmax(30rem,min-content));
+    justify-content: center;
+    grid-gap: 1rem;
+    text-align: center;
+
+    &__description{
+       
+    }
+    
+    
+    &__skills{
+        
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        &-list{
+            display: flex;
+        }
+    }
+
+    & ul{
+        text-align: left;
+        margin-left: 2rem;
+        
+    }
+
+    & li{
+        list-style: none;
+        margin-left: 2rem;
+        
+
+        &.python{
+            list-style: square;
+        }
+    }
+}
+
+.proyectsSection{
+    clip-path: polygon(0 0,100% 15vh, 100% 100%, 0 100% );
+    padding-top: 8rem;
+    color: white;
+    height: fit-content;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+   
+
+    
+    &__description{
+        font-size: 1.6rem;
+    }
+
+    &__categoryContainer{
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1rem;
+        max-width: 100%;
+        position: relative;
+        
+        ul{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            text-decoration: none;
+            list-style: none;
+            justify-content: center;
+        }
+        &-item{
+            margin-left: 1rem;
+            cursor: pointer;
+            transition: transform 2s;
+            min-width: 3rem;
+
+            &::after{
+                content: "";
+                border-bottom: 3px solid white;
+                top: 100%;
+                left: 50%;
+                height: 3px;
+                width: 1px;
+
+            }
+            
+
+            &.active{
+                border-bottom: 3px solid white;
+                
+                
+                
+            }
+           
+            
+        }
+    }
+
+    &__projects{
+        display: grid;   
+        grid-template-columns: repeat(auto-fit,minmax(25rem,min-content));
+        grid-gap: 1rem;
+        justify-content: center;
+        
+        
+
+        
+        &.loading{
+            margin: 0 15rem;
+        }
+    }
+
+   
+}
