@@ -4,6 +4,8 @@ import SProject from './components/specific-project/specific-project.component';
 import Home from './pages/home.page';
 import {Route, Switch} from 'react-router-dom';
 
+
+
 function App() {
   return (
     <div className="App">
@@ -12,6 +14,8 @@ function App() {
         <Route exact={true} path='/' component={Home} />
         <Route exact path='/aiProjects/:aiProject' component={SProject} />
       </Switch>
+
+      
      
     </div>
   );

@@ -20,6 +20,7 @@
        top: -102.5%;
        padding:  0 1rem;
        
+       
 
        
        
@@ -83,13 +84,17 @@
 
 .opacity{
     opacity: 0;
+    
+   
 
     &:hover{
         background-color: rgba($color: black, $alpha: 0.6);
         border-radius: 3px;
-        opacity: 1;
         height: 100%;
         width: 100%;
+        opacity: 1;
+       
+        
     }
 }
 

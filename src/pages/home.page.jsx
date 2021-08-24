@@ -13,6 +13,19 @@ const Home = () => {
 
     
     useEffect(() => {
+
+        // const fetchPost = async () =>{
+        //     axios.post('http://localhost:3001/aiProject/createAiProject')
+        // }
+
+        // fetchPost();
+
+        //  const fetchPost = async () =>{
+        //     axios.post('http://localhost:3001/devProject/createDevProject')
+        // }
+
+        // fetchPost();
+
         (async () =>{
             setProjectLoading(true)
             try {

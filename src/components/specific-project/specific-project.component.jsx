@@ -6,46 +6,60 @@ import AIResult from '../aiResult/aiResult.component'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
+import ImageInput from '../imageInput/imageInput.component';
+import SpecificDataPrediction from './specific-project.types/specific-project.types.data';
+
 
 const SProject = () => {
     const [data,setData] = useState({attributes:[]})
     const [name, setName] = useState("")
+   
+
     const location = useLocation()
-    const {state} = location
+    const {machineLearningId,tags} = location.state
+    console.log(location)
     
     const [isLoading, setLoading] = useState(false)
     const [results, setResults] = useState(false)
     const [responseResults, setResponse] = useState("")
+    const [componentToRend, setComponentToRend] = useState('machineLearning')
+
+    const components = {
+        machineLearning:SpecificDataPrediction,
+        artificialIntelligence:ImageInput
+        };
+
+    const getComponent = () =>{
+        if (tags.includes('artificialIntelligence')) {
+            setComponentToRend('artificialIntelligence')
+        }
+    }
+
 
     useEffect(()=>{
         const getData = async () =>{
-            const fetch = await axios.get(`http://localhost:3001/aiProject/${state}`);
+            const fetch = await axios.get(`http://localhost:3001/aiProject/${machineLearningId}`);
             setData(fetch.data.project);
         };
         getData();
-        for (let index = 0; index < data.attributes.length; index++) {
-            
-            const name = data.attributes[index]
-            const value = data.mean_values[index]
-            setName(state => ({...state,[name]:value}))
-           
-        }
+        getComponent();
         
-    },[data,state])    
-    
-    const onInputChange = (e) =>{
-        e.preventDefault();
-        setName(state => ({...state,[e.target.name]:e.target.value}))
-    }
+    },[machineLearningId,tags])  
+
+    console.log(componentToRend)
+
 
     const handleClick = async  ()  => {
         setResults(false)
         setLoading(true)
         let fetch_results = ""
         try {
+            console.log('dataDir',`http://127.0.0.1:5000/predict_${data.dir}`)
             fetch_results = await axios.post(`http://127.0.0.1:5000/predict_${data.dir}`, {
                 data: JSON.stringify(name)
             })
+
+
             setResponse(fetch_results.data.prediction)
         } catch (error) {
             console.log(error)
@@ -56,6 +70,7 @@ const SProject = () => {
         setResults(true)
     }
 
+    console.log(responseResults)
 
     const outsideClick = (e) => {
         if (results === true) {
@@ -68,7 +83,7 @@ const SProject = () => {
     }
 
 
-
+    const CompName = components[`${componentToRend}`]
 
     return (
         <div className='specific-project' onClick={outsideClick} >
@@ -86,26 +101,13 @@ const SProject = () => {
             </div>
                     <fieldset className="parametersField">
                         <legend className=''>Parameters</legend>
-                        { isLoading ? <Loader /> : (
-                            <form className='specific-project__params'>
-                                    
-                                    {data.attributes.map((parameter,idx) => {
-                                        
-                                        return(
-                                            <div className="parameter" key={idx}>
-                                                    <div className="parameter__desc">
-                                                        <div className="parameter__desc-title">{parameter.toUpperCase()}</div>    
-                                                        <input type='field' onChange={onInputChange} name={`${parameter}`} className='parameter__desc-input' placeholder={name[parameter]}></input>
-                                                    </div>
-                                                    <p className='parameter__text'>{data.attributes_info[idx]}</p>
-                                            </div>
-                                        )
-                                        
-                                        
-                                    })}
-                                    
-                        
-                            </form>)
+                        { 
+
+                        isLoading ? <Loader /> : (     
+                                 <form className='specific-project__params'>
+                                     <CompName data={data} setName={setName} name={name}/> 
+                                </form>
+                            )
                         } 
                         {results ? <AIResult response={responseResults}/> : "" }
                     </fieldset>

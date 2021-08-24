@@ -1,6 +1,9 @@
 import React from 'react';
 import './card.styles.scss';
 import {SiGithub,SiRedux, SiFirebase,SiFlask,SiReact,SiPython,SiPostgresql,SiReactrouter,SiNodeDotJs,SiMongodb, SiTensorflow} from 'react-icons/si';
+import SiSklearn from '../iconComponent/SiSklearn';
+import SiPandas from '../iconComponent/SiPandas';
+
 import {BsLink} from 'react-icons/bs';
 import { div } from 'prelude-ls';
 import { useHistory } from 'react-router';
@@ -20,8 +23,8 @@ const Card = ({cardData}) =>{
     postgressSQL: SiPostgresql,
     mongoDb: SiMongodb,
     python: SiPython,
-    scikitLearn:div,
-    pandas: div,
+    scikitLearn:SiSklearn,
+    pandas: SiPandas,
     tensorflow: SiTensorflow
     };
     const gitHubClick = (e) =>{
@@ -32,7 +35,7 @@ const Card = ({cardData}) =>{
     const liveLinkClick = (e) =>{
         e.preventDefault()
         if(tags.includes('machineLearning')){
-            history.push(`aiProjects/${liveLink}`,machineLearningId)
+            history.push(`aiProjects/${liveLink}`,({machineLearningId,tags}))
         }else{
             window.open(liveLink, '_blank', 'noopener,noreferrer')
         }
