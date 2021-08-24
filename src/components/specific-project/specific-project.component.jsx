@@ -38,7 +38,7 @@ const SProject = () => {
 
     useEffect(()=>{
         const getData = async () =>{
-            const fetch = await axios.get(`http://localhost:3001/aiProject/${machineLearningId}`);
+            const fetch = await axios.get(`https://portfolioapidiego.herokuapp.com/aiProject/${machineLearningId}`);
             setData(fetch.data.project);
         };
         getData();
@@ -54,8 +54,8 @@ const SProject = () => {
         setLoading(true)
         let fetch_results = ""
         try {
-            console.log('dataDir',`http://127.0.0.1:5000/predict_${data.dir}`)
-            fetch_results = await axios.post(`http://127.0.0.1:5000/predict_${data.dir}`, {
+            
+            fetch_results = await axios.post(` https://machinelearningpred.herokuapp.com/predict_${data.dir}`, {
                 data: JSON.stringify(name)
             })
 

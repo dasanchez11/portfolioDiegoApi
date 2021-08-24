@@ -14,22 +14,10 @@ const Home = () => {
     
     useEffect(() => {
 
-        // const fetchPost = async () =>{
-        //     axios.post('http://localhost:3001/aiProject/createAiProject')
-        // }
-
-        // fetchPost();
-
-        //  const fetchPost = async () =>{
-        //     axios.post('http://localhost:3001/devProject/createDevProject')
-        // }
-
-        // fetchPost();
-
         (async () =>{
             setProjectLoading(true)
             try {
-                const data = await axios.get('http://localhost:3001/devProject/getDevProjects')
+                const data = await axios.get('https://portfolioapidiego.herokuapp.com/devProject/getDevProjects')
                 setFetchData(data.data.project)
                 setActiveProject({
                     'active': 'all'
